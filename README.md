@@ -2,6 +2,15 @@
 learning typescript
 
 # type
+
+Definition: Declaration and assignment
+```typescript
+  let a = 1; // Declaration + assignment, the type of a is fixed
+  a='hello' //error
+
+  let a: "male" | "female"
+```
+
 basic
 ```typescript
   let a: number; //string, boolean, number[], string[], 
@@ -9,10 +18,11 @@ basic
   a = 30;
   a = 'hello'; // error
 
-  let obj: object;
-  obj = { name: 'John', age: 30 };
-  obj = [1, 2, 3]; // Array is also an object
-  obj = 10; // error
+  let b: {name: string, age: number}
+  let b: {name: string, age?: number}
+  let b: {name: string, [propName: string]:any}
+  let b:{name: string} & {age: number}
+  b={name:'ajax',age:12}
 ```
 tuple
 ```typescript
@@ -27,12 +37,37 @@ enum
   color = Color.Red;
   color = 1; // This is fine because enums are number-based
 ```
-any
+any & unknown
 ```typescript
   let anyType: any;
   anyType = 'hello';
   anyType = 10;
   anyType = true;
+
+let anyType; // hidden any
+  anyType = 'hello';
+  anyType = 10;
+  anyType = true;
+
+// avoid using any
+  let e: unknown;
+  e = 10;
+  e = "hello";
+  e = true;
+
+  let s: string;
+  s = anyType; // correct
+  e = "hello";
+  s = e; // error
+
+  if(typeof e === 'string') {
+    s = e; // correct
+  }
+
+  // same as dynamic in Dart
+  s = e as string;
+  s = <string> e;
+  
 ```
 void
 ```typescript
@@ -65,6 +100,13 @@ customed type
   union = 'hello';
   union = 10;
   union = true; // error
+```
+function
+```typescript
+   let d: (a:number,b:number)=>number
+      d = function(a:number,b:number):number {
+        return a+b;
+      }
 ```
 interface
 ```typescript
@@ -112,3 +154,4 @@ console.log(dog.getAge()); // Output: 5
 console.log(dog.getSpecies()); // Output: Canine
 
 ```
+
